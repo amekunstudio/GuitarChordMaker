@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChordSheet Pro - 本格コード譜作成</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <div class="logo">🎸 ChordSheet Pro</div>
+        <div class="actions">
+            <button id="save-btn" class="secondary">セーブ (Ctrl+S)</button>
+            <button id="print-btn">印刷 / PDF保存</button>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- 入力エディタ -->
+        <section class="editor-pane">
+            <div class="pane-header">
+                <h3>エディタ</h3>
+                <span class="hint">書き方: [C]歌詞 [G7]歌詞</span>
+            </div>
+            <textarea id="editor" placeholder="ここに歌詞とコードを入力してください..."></textarea>
+        </section>
+
+        <!-- プレビュー -->
+        <section class="preview-pane">
+            <div class="pane-header">
+                <h3>プレビュー</h3>
+            </div>
+            <div id="output-canvas">
+                <div id="song-display"></div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 保存通知 -->
+    <div id="toast" class="toast">ブラウザに保存しました</div>
+
+    <script src="script.js"></script>
+</body>
+</html>
