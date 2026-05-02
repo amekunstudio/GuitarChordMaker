@@ -1,0 +1,180 @@
+/* 基本スタイル */
+:root {
+    --primary-color: #2563eb;
+    --secondary-color: #64748b;
+    --bg-dark: #1e293b;
+    --bg-light: #f1f5f9;
+    --border-color: #cbd5e1;
+    --chord-color: #e67e22; /* 視認性の高いオレンジ */
+    --lyric-color: #334155;
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* ヘッダー */
+header {
+    background-color: var(--bg-dark);
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.logo {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+/* メインレイアウト */
+.container {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+}
+
+.editor-pane, .preview-pane {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.pane-header {
+    background: #e2e8f0;
+    padding: 8px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.pane-header h3 {
+    margin: 0;
+    font-size: 0.85rem;
+    color: #475569;
+    text-transform: uppercase;
+}
+
+.hint {
+    font-size: 0.75rem;
+    color: #64748b;
+}
+
+/* エディタ */
+.editor-pane {
+    border-right: 1px solid var(--border-color);
+}
+
+textarea {
+    flex: 1;
+    border: none;
+    padding: 20px;
+    font-size: 16px;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    line-height: 1.8;
+    outline: none;
+    resize: none;
+}
+
+/* プレビューエリア */
+.preview-pane {
+    background-color: var(--bg-light);
+    overflow-y: auto;
+}
+
+#output-canvas {
+    background-color: white;
+    min-height: 100%;
+    width: 90%;
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 40px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    box-sizing: border-box;
+}
+
+/* コード譜表示のコアCSS */
+.chord-line {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 1.2rem;
+    line-height: 1.1;
+}
+
+.chord-pair {
+    display: inline-flex;
+    flex-direction: column;
+    margin-right: 1px;
+}
+
+.chord {
+    color: var(--chord-color);
+    font-weight: bold;
+    font-size: 0.9rem;
+    height: 1.2rem; /* コードがない場所も高さを確保 */
+    white-space: pre;
+}
+
+.lyric {
+    color: var(--lyric-color);
+    font-size: 1.1rem;
+    white-space: pre;
+    min-height: 1.2rem;
+}
+
+/* ボタン */
+button {
+    padding: 8px 16px;
+    border-radius: 6px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+button:hover { opacity: 0.9; }
+
+#print-btn { background-color: var(--primary-color); color: white; }
+#save-btn { background-color: var(--secondary-color); color: white; margin-right: 10px; }
+
+/* 通知トースト */
+.toast {
+    position: fixed;
+    bottom: -50px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #334155;
+    color: white;
+    padding: 10px 25px;
+    border-radius: 50px;
+    transition: bottom 0.4s ease;
+    font-size: 0.9rem;
+}
+
+.toast.show { bottom: 30px; }
+
+/* 印刷設定 */
+@media print {
+    header, .editor-pane, .pane-header, .toast { display: none !important; }
+    .container { display: block; }
+    .preview-pane { background: white; overflow: visible; }
+    #output-canvas { box-shadow: none; width: 100%; margin: 0; padding: 0; }
+}
+
+/* レスポンシブ */
+@media (max-width: 768px) {
+    .container { flex-direction: column; }
+    .editor-pane { height: 40%; border-right: none; border-bottom: 1px solid var(--border-color); }
+}
